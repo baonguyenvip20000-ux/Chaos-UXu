@@ -1,15 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Bao Nguyen · UX Playground</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
-
-<style>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bao Nguyen · Sân Chơi UX</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&amp;display=swap" rel="stylesheet">
+  <style>
 *{
   box-sizing:border-box;
   font-family:'Space Grotesk',system-ui;
@@ -23,10 +22,11 @@ html,body{
 body{
   background:#000;
   color:#fff;
-  overflow:hidden;
+  overflow-x:hidden;
+  overflow-y:auto;
 }
 
-/* ===== BACKGROUND ===== */
+/* ===== NỀN ===== */
 .bg{
   position:fixed;
   inset:-50%;
@@ -36,6 +36,7 @@ body{
     radial-gradient(circle at 50% 80%, #ffe60055, transparent 40%);
   animation:move 16s linear infinite;
   filter:blur(80px);
+  z-index:0;
 }
 
 @keyframes move{
@@ -44,20 +45,20 @@ body{
   100%{transform:translate(0,0)}
 }
 
-/* ===== LAYOUT ===== */
+/* ===== BỐ CỤC ===== */
 .container{
   position:relative;
   z-index:2;
-  height:100%;
+  min-height:100%;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:40px;
+  padding:60px 40px 80px;
 }
 
-/* ===== TEXT ===== */
+/* ===== CHỮ ===== */
 h1{
   font-size:clamp(42px,8vw,96px);
   margin:0;
@@ -65,6 +66,7 @@ h1{
   background:linear-gradient(90deg,#00f5ff,#ff00c8,#ffe600);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+  background-clip:text;
 }
 
 .subtitle{
@@ -75,7 +77,7 @@ h1{
   opacity:.7;
 }
 
-/* ===== BUTTONS ===== */
+/* ===== NÚT ===== */
 .actions{
   margin-top:50px;
   display:flex;
@@ -92,15 +94,35 @@ h1{
   backdrop-filter:blur(10px);
   color:#fff;
   cursor:pointer;
-  transition:.3s;
+  transition:all .3s ease;
+  font-weight:500;
+  font-size:15px;
 }
 
 .btn:hover{
   transform:scale(1.1);
   box-shadow:0 0 30px rgba(0,245,255,.6);
+  background:rgba(255,255,255,.15);
 }
 
-/* ===== CARDS ===== */
+.btn:active{
+  transform:scale(1.05);
+}
+
+.btn.active{
+  animation:pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse{
+  0%, 100%{
+    box-shadow:0 0 20px rgba(0,245,255,.4);
+  }
+  50%{
+    box-shadow:0 0 40px rgba(255,0,200,.6);
+  }
+}
+
+/* ===== THẺ ===== */
 .cards{
   margin-top:80px;
   display:grid;
@@ -116,25 +138,35 @@ h1{
   background:rgba(255,255,255,.06);
   border:1px solid rgba(255,255,255,.15);
   backdrop-filter:blur(14px);
-  transition:.4s;
+  transition:all .4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor:pointer;
 }
 
 .card:hover{
   transform:translateY(-12px) rotate(-1deg);
   box-shadow:0 20px 50px rgba(0,0,0,.6);
+  background:rgba(255,255,255,.1);
+  border-color:rgba(255,255,255,.3);
+}
+
+.card.flipped{
+  transform:rotateY(180deg);
 }
 
 .card h3{
   margin:0 0 8px;
+  font-weight:700;
+  font-size:20px;
 }
 
 .card p{
   margin:0;
   font-size:14px;
   opacity:.75;
+  line-height:1.5;
 }
 
-/* ===== FOOTER ===== */
+/* ===== CHÂN TRANG ===== */
 footer{
   position:fixed;
   bottom:14px;
@@ -142,45 +174,283 @@ footer{
   text-align:center;
   font-size:12px;
   opacity:.5;
+  z-index:3;
+}
+
+/* ===== THÔNG BÁO ===== */
+.toast{
+  position:fixed;
+  top:30px;
+  left:50%;
+  transform:translateX(-50%) translateY(-100px);
+  background:rgba(0,245,255,.9);
+  color:#000;
+  padding:16px 32px;
+  border-radius:50px;
+  font-weight:700;
+  font-size:14px;
+  backdrop-filter:blur(10px);
+  z-index:1000;
+  opacity:0;
+  transition:all .4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events:none;
+}
+
+.toast.show{
+  transform:translateX(-50%) translateY(0);
+  opacity:1;
 }
 </style>
-</head>
-
-<body>
-<div class="bg"></div>
-
-<div class="container">
-  <h1>Bao Nguyen</h1>
-  <div class="subtitle">UX Playground · No Rules · Motion First</div>
-
-  <div class="actions">
-    <div class="btn">Explore</div>
-    <div class="btn">Hover</div>
-    <div class="btn">Chaos</div>
-  </div>
-
-  <div class="cards">
-    <div class="card">
-      <h3>Experimental UI</h3>
-      <p>Thiết kế không theo khuôn mẫu.</p>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="bg"></div>
+  <div class="toast" id="toast"></div>
+  <main class="container">
+   <h1 id="mainTitle">Bao Nguyen</h1>
+   <div class="subtitle" id="subtitle">
+    Sân Chơi UX · Không Quy Tắc · Chuyển Động Trước Tiên
+   </div>
+   <div class="actions">
+    <div class="btn" id="btn1">
+     Khám Phá
     </div>
-    <div class="card">
-      <h3>Motion First</h3>
-      <p>Chuyển động tạo cảm xúc.</p>
+    <div class="btn" id="btn2">
+     Di Chuột
     </div>
-    <div class="card">
-      <h3>Raw UX</h3>
-      <p>Không polish quá mức.</p>
+    <div class="btn" id="btn3">
+     Hỗn Loạn
     </div>
-    <div class="card">
-      <h3>Playground</h3>
-      <p>Nơi thử nghiệm ý tưởng.</p>
+   </div>
+   <div class="cards" id="cardsContainer">
+    <div class="card" data-card="1">
+     <h3 id="card1Title">Giao Diện Thử Nghiệm</h3>
+     <p id="card1Desc">Thiết kế không theo khuôn mẫu.</p>
     </div>
-  </div>
-</div>
+    <div class="card" data-card="2">
+     <h3 id="card2Title">Chuyển Động Trước</h3>
+     <p id="card2Desc">Chuyển động tạo cảm xúc.</p>
+    </div>
+    <div class="card" data-card="3">
+     <h3 id="card3Title">Trải Nghiệm Thô</h3>
+     <p id="card3Desc">Không polish quá mức.</p>
+    </div>
+    <div class="card" data-card="4">
+     <h3 id="card4Title">Sân Chơi</h3>
+     <p id="card4Desc">Nơi thử nghiệm ý tưởng.</p>
+    </div>
+   </div>
+  </main>
+  <footer id="footer">
+   © Bao Nguyen · GitHub Pages
+  </footer>
+  <script>
+// Cấu hình mặc định
+const defaultConfig = {
+  main_title: "Bao Nguyen",
+  subtitle_text: "Sân Chơi UX · Không Quy Tắc · Chuyển Động Trước Tiên",
+  button_1: "Khám Phá",
+  button_2: "Di Chuột",
+  button_3: "Hỗn Loạn",
+  card_1_title: "Giao Diện Thử Nghiệm",
+  card_1_description: "Thiết kế không theo khuôn mẫu.",
+  card_2_title: "Chuyển Động Trước",
+  card_2_description: "Chuyển động tạo cảm xúc.",
+  card_3_title: "Trải Nghiệm Thô",
+  card_3_description: "Không polish quá mức.",
+  card_4_title: "Sân Chơi",
+  card_4_description: "Nơi thử nghiệm ý tưởng.",
+  footer_text: "© Bao Nguyen · GitHub Pages",
+  background_color: "#000000",
+  gradient_1: "#00f5ff",
+  gradient_2: "#ff00c8",
+  gradient_3: "#ffe600",
+  font_family: "Space Grotesk"
+};
 
-<footer>
-  © Bao Nguyen · GitHub Pages
-</footer>
-</body>
+// Hiển thị thông báo
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2000);
+}
+
+// Cập nhật giao diện theo cấu hình
+async function onConfigChange(config) {
+  const mainTitle = document.getElementById('mainTitle');
+  const subtitle = document.getElementById('subtitle');
+  const btn1 = document.getElementById('btn1');
+  const btn2 = document.getElementById('btn2');
+  const btn3 = document.getElementById('btn3');
+  const footer = document.getElementById('footer');
+  
+  // Cập nhật nội dung văn bản
+  mainTitle.textContent = config.main_title || defaultConfig.main_title;
+  subtitle.textContent = config.subtitle_text || defaultConfig.subtitle_text;
+  btn1.textContent = config.button_1 || defaultConfig.button_1;
+  btn2.textContent = config.button_2 || defaultConfig.button_2;
+  btn3.textContent = config.button_3 || defaultConfig.button_3;
+  footer.textContent = config.footer_text || defaultConfig.footer_text;
+  
+  // Cập nhật các thẻ
+  for (let i = 1; i <= 4; i++) {
+    const titleEl = document.getElementById(`card${i}Title`);
+    const descEl = document.getElementById(`card${i}Desc`);
+    titleEl.textContent = config[`card_${i}_title`] || defaultConfig[`card_${i}_title`];
+    descEl.textContent = config[`card_${i}_description`] || defaultConfig[`card_${i}_description`];
+  }
+  
+  // Cập nhật màu sắc
+  const bgColor = config.background_color || defaultConfig.background_color;
+  const grad1 = config.gradient_1 || defaultConfig.gradient_1;
+  const grad2 = config.gradient_2 || defaultConfig.gradient_2;
+  const grad3 = config.gradient_3 || defaultConfig.gradient_3;
+  
+  document.body.style.background = bgColor;
+  mainTitle.style.background = `linear-gradient(90deg, ${grad1}, ${grad2}, ${grad3})`;
+  mainTitle.style.webkitBackgroundClip = 'text';
+  mainTitle.style.webkitTextFillColor = 'transparent';
+  mainTitle.style.backgroundClip = 'text';
+  
+  // Cập nhật phông chữ
+  const customFont = config.font_family || defaultConfig.font_family;
+  const baseFontStack = 'system-ui, -apple-system, sans-serif';
+  document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+}
+
+// Ánh xạ đến khả năng
+function mapToCapabilities(config) {
+  return {
+    recolorables: [
+      {
+        get: () => config.background_color || defaultConfig.background_color,
+        set: (value) => {
+          if (window.elementSdk) {
+            window.elementSdk.setConfig({ background_color: value });
+          }
+        }
+      },
+      {
+        get: () => config.gradient_1 || defaultConfig.gradient_1,
+        set: (value) => {
+          if (window.elementSdk) {
+            window.elementSdk.setConfig({ gradient_1: value });
+          }
+        }
+      },
+      {
+        get: () => config.gradient_2 || defaultConfig.gradient_2,
+        set: (value) => {
+          if (window.elementSdk) {
+            window.elementSdk.setConfig({ gradient_2: value });
+          }
+        }
+      },
+      {
+        get: () => config.gradient_3 || defaultConfig.gradient_3,
+        set: (value) => {
+          if (window.elementSdk) {
+            window.elementSdk.setConfig({ gradient_3: value });
+          }
+        }
+      }
+    ],
+    borderables: [],
+    fontEditable: {
+      get: () => config.font_family || defaultConfig.font_family,
+      set: (value) => {
+        if (window.elementSdk) {
+          window.elementSdk.setConfig({ font_family: value });
+        }
+      }
+    },
+    fontSizeable: undefined
+  };
+}
+
+// Ánh xạ đến giá trị bảng chỉnh sửa
+function mapToEditPanelValues(config) {
+  return new Map([
+    ["main_title", config.main_title || defaultConfig.main_title],
+    ["subtitle_text", config.subtitle_text || defaultConfig.subtitle_text],
+    ["button_1", config.button_1 || defaultConfig.button_1],
+    ["button_2", config.button_2 || defaultConfig.button_2],
+    ["button_3", config.button_3 || defaultConfig.button_3],
+    ["card_1_title", config.card_1_title || defaultConfig.card_1_title],
+    ["card_1_description", config.card_1_description || defaultConfig.card_1_description],
+    ["card_2_title", config.card_2_title || defaultConfig.card_2_title],
+    ["card_2_description", config.card_2_description || defaultConfig.card_2_description],
+    ["card_3_title", config.card_3_title || defaultConfig.card_3_title],
+    ["card_3_description", config.card_3_description || defaultConfig.card_3_description],
+    ["card_4_title", config.card_4_title || defaultConfig.card_4_title],
+    ["card_4_description", config.card_4_description || defaultConfig.card_4_description],
+    ["footer_text", config.footer_text || defaultConfig.footer_text]
+  ]);
+}
+
+// Khởi tạo Element SDK
+if (window.elementSdk) {
+  window.elementSdk.init({
+    defaultConfig,
+    onConfigChange,
+    mapToCapabilities,
+    mapToEditPanelValues
+  });
+}
+
+// Hành vi nút tương tác
+document.getElementById('btn1').addEventListener('click', function() {
+  const cards = document.querySelectorAll('.card');
+  cards.forEach((card, index) => {
+    setTimeout(() => {
+      card.style.animation = 'none';
+      setTimeout(() => {
+        card.style.animation = '';
+      }, 10);
+    }, index * 100);
+  });
+  showToast('✨ Đang khám phá sân chơi!');
+});
+
+document.getElementById('btn2').addEventListener('click', function() {
+  this.classList.add('active');
+  showToast('👋 Di chuột qua các thẻ bên dưới!');
+  
+  setTimeout(() => {
+    this.classList.remove('active');
+  }, 3000);
+});
+
+document.getElementById('btn3').addEventListener('click', function() {
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card => {
+    const randomX = (Math.random() - 0.5) * 100;
+    const randomY = (Math.random() - 0.5) * 100;
+    const randomRotate = (Math.random() - 0.5) * 360;
+    
+    card.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg)`;
+    
+    setTimeout(() => {
+      card.style.transform = '';
+    }, 2000);
+  });
+  showToast('🌀 Chế độ hỗn loạn đã kích hoạt!');
+});
+
+// Tương tác khi nhấp thẻ
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', function() {
+    const cardNum = this.getAttribute('data-card');
+    const title = this.querySelector('h3').textContent;
+    showToast(`💡 ${title}`);
+  });
+});
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b897158a361fd7d',t:'MTc2NzUxNjE0OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
