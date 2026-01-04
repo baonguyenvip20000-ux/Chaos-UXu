@@ -1,35 +1,54 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Bao Nguyen · UX Playground</title>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap');
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
 
+<style>
 *{
   box-sizing:border-box;
-  font-family:'Space Grotesk', sans-serif;
+  font-family:'Space Grotesk',system-ui;
+}
+
+html,body{
+  margin:0;
+  height:100%;
 }
 
 body{
-  margin:0;
-  min-height:100vh;
-  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364,#000);
-  background-size:400% 400%;
-  animation:bg 12s ease infinite;
+  background:#000;
   color:#fff;
+  overflow:hidden;
 }
 
-@keyframes bg{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+/* ===== BACKGROUND ===== */
+.bg{
+  position:fixed;
+  inset:-50%;
+  background:
+    radial-gradient(circle at 20% 20%, #00f5ff55, transparent 40%),
+    radial-gradient(circle at 80% 30%, #ff00c855, transparent 40%),
+    radial-gradient(circle at 50% 80%, #ffe60055, transparent 40%);
+  animation:move 16s linear infinite;
+  filter:blur(80px);
 }
 
-.hero{
-  min-height:100vh;
+@keyframes move{
+  0%{transform:translate(0,0)}
+  50%{transform:translate(20%,10%)}
+  100%{transform:translate(0,0)}
+}
+
+/* ===== LAYOUT ===== */
+.container{
+  position:relative;
+  z-index:2;
+  height:100%;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -38,24 +57,27 @@ body{
   padding:40px;
 }
 
+/* ===== TEXT ===== */
 h1{
-  font-size:clamp(42px,7vw,88px);
+  font-size:clamp(42px,8vw,96px);
   margin:0;
+  line-height:1;
   background:linear-gradient(90deg,#00f5ff,#ff00c8,#ffe600);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
 .subtitle{
-  margin-top:14px;
-  font-size:15px;
-  letter-spacing:3px;
+  margin-top:16px;
+  font-size:14px;
+  letter-spacing:4px;
   text-transform:uppercase;
-  opacity:.75;
+  opacity:.7;
 }
 
+/* ===== BUTTONS ===== */
 .actions{
-  margin-top:40px;
+  margin-top:50px;
   display:flex;
   gap:20px;
   flex-wrap:wrap;
@@ -63,9 +85,9 @@ h1{
 }
 
 .btn{
-  padding:14px 34px;
+  padding:14px 36px;
   border-radius:999px;
-  border:1px solid rgba(255,255,255,.3);
+  border:1px solid rgba(255,255,255,.25);
   background:rgba(255,255,255,.08);
   backdrop-filter:blur(10px);
   color:#fff;
@@ -78,33 +100,87 @@ h1{
   box-shadow:0 0 30px rgba(0,245,255,.6);
 }
 
+/* ===== CARDS ===== */
+.cards{
+  margin-top:80px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:24px;
+  width:100%;
+  max-width:1000px;
+}
+
+.card{
+  padding:26px;
+  border-radius:20px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.15);
+  backdrop-filter:blur(14px);
+  transition:.4s;
+}
+
+.card:hover{
+  transform:translateY(-12px) rotate(-1deg);
+  box-shadow:0 20px 50px rgba(0,0,0,.6);
+}
+
+.card h3{
+  margin:0 0 8px;
+}
+
+.card p{
+  margin:0;
+  font-size:14px;
+  opacity:.75;
+}
+
+/* ===== FOOTER ===== */
 footer{
   position:fixed;
-  bottom:16px;
+  bottom:14px;
   width:100%;
   text-align:center;
+  font-size:12px;
   opacity:.5;
-  font-size:13px;
 }
 </style>
 </head>
 
 <body>
+<div class="bg"></div>
 
-<section class="hero">
+<div class="container">
   <h1>Bao Nguyen</h1>
   <div class="subtitle">UX Playground · No Rules · Motion First</div>
 
   <div class="actions">
     <div class="btn">Explore</div>
-    <div class="btn">Hover Me</div>
-    <div class="btn">Chaos Mode</div>
+    <div class="btn">Hover</div>
+    <div class="btn">Chaos</div>
   </div>
-</section>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Experimental UI</h3>
+      <p>Thiết kế không theo khuôn mẫu.</p>
+    </div>
+    <div class="card">
+      <h3>Motion First</h3>
+      <p>Chuyển động tạo cảm xúc.</p>
+    </div>
+    <div class="card">
+      <h3>Raw UX</h3>
+      <p>Không polish quá mức.</p>
+    </div>
+    <div class="card">
+      <h3>Playground</h3>
+      <p>Nơi thử nghiệm ý tưởng.</p>
+    </div>
+  </div>
+</div>
 
 <footer>
-  © Bao Nguyen — GitHub Pages
+  © Bao Nguyen · GitHub Pages
 </footer>
-
 </body>
 </html>
