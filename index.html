@@ -1,64 +1,93 @@
-data:text/html;charset=utf-8,
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<title>GB Admin Post Editor</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<div class="gb-card">
+  <div class="gb-image">
+    <img src="https://YOUR-IMAGE-LINK.png" alt="GB Game Design">
+  </div>
+
+  <div class="gb-content">
+    <h1>Gia Bảo</h1>
+    <p>
+      Designer chuyên thiết kế <b>thumbnail game</b>, <b>banner game</b>,
+      <b>logo shop game</b> và <b>logo game kiếm hiệp</b>.
+      Tập trung vào hình ảnh bắt mắt, đúng chất game và tối ưu hiển thị.
+    </p>
+
+    <a class="gb-btn" href="#" target="_blank">Xem sản phẩm</a>
+  </div>
+</div>
+
 <style>
-body{background:#f0f2f5;font-family:system-ui}
-.app{max-width:380px;margin:20px auto}
-.box{background:#fff;border-radius:12px;box-shadow:0 6px 16px rgba(0,0,0,.15);padding:12px;margin-bottom:16px}
-textarea{width:100%;border:none;resize:none;min-height:90px;font-size:14px;outline:none}
-.tools{display:flex;gap:8px;margin-top:8px}
-button,label{background:#1877f2;color:#fff;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:13px}
-label{background:#42b72a}
-.header{display:flex;gap:10px;align-items:center}
-.header img{width:40px;height:40px;border-radius:50%}
-.time{font-size:12px;color:#777}
-.content{margin:10px 0;font-size:14px;white-space:pre-line}
-#imgPreview img{width:100%;border-radius:10px}
+.gb-card{
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  background: linear-gradient(135deg,#020617,#0f172a);
+  border-radius: 24px;
+  color: #fff;
+  font-family: system-ui,-apple-system,BlinkMacSystemFont;
+  box-shadow: 0 30px 60px rgba(0,0,0,.45);
+}
+
+/* IMAGE */
+.gb-image{
+  flex: 0 0 320px;
+}
+
+.gb-image img{
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  object-fit: contain;
+  background: #020617;
+}
+
+/* CONTENT */
+.gb-content h1{
+  margin: 0 0 12px;
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.gb-content p{
+  margin: 0 0 20px;
+  font-size: 16px;
+  line-height: 1.7;
+  opacity: .9;
+}
+
+.gb-content b{
+  color: #facc15;
+  font-weight: 600;
+}
+
+/* BUTTON */
+.gb-btn{
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 14px;
+  background: linear-gradient(135deg,#facc15,#f59e0b);
+  color: #020617;
+  text-decoration: none;
+  font-weight: 700;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.gb-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(250,204,21,.4);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .gb-card{
+    flex-direction: column;
+    text-align: center;
+  }
+  .gb-image{
+    width: 100%;
+    max-width: 260px;
+  }
+}
 </style>
-</head>
-<body>
-<div class="app">
-
-<div class="box">
-<textarea id="textInput" placeholder="Nhập nội dung bài viết..."></textarea>
-<div class="tools">
-<label>📷 Ảnh<input type="file" hidden accept="image/*" onchange="loadImg(event)"></label>
-<button onclick="exportHTML()">📥 Xuất HTML</button>
-</div>
-</div>
-
-<div class="box" id="postPreview">
-<div class="header">
-<img src="https://i.imgur.com/4ZQZ4ZP.png">
-<div>
-<strong>GB Design</strong>
-<div class="time">Admin · Google Sites</div>
-</div>
-</div>
-<div class="content" id="textPreview"></div>
-<div id="imgPreview"></div>
-</div>
-
-</div>
-
-<script>
-const t=document.getElementById("textInput");
-const p=document.getElementById("textPreview");
-t.oninput=()=>p.textContent=t.value;
-function loadImg(e){
- const f=e.target.files[0]; if(!f)return;
- const r=new FileReader();
- r.onload=()=>imgPreview.innerHTML='<img src="'+r.result+'">';
- r.readAsDataURL(f);
-}
-function exportHTML(){
- navigator.clipboard.writeText(postPreview.outerHTML);
- alert("Đã copy HTML – dán vào Google Sites → Nhúng → HTML");
-}
-</script>
-</body>
-</html>
