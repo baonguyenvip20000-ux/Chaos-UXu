@@ -1,89 +1,100 @@
-<div class="fb-post">
-  <div class="fb-header">
-    <div class="fb-avatar">
-      <img src="https://YOUR-AVATAR-LINK.jpg" alt="Gia Bảo">
-    </div>
-    <div class="fb-user">
-      <strong>Gia Bảo</strong>
-      <span>Designer Game · Public</span>
-    </div>
-  </div>
+<div class="fb-wrap">
+  <div class="fb-post">
 
-  <div class="fb-content">
-    <p>
+    <!-- HEADER -->
+    <div class="fb-head">
+      <img class="fb-avatar"
+        src="https://YOUR-AVATAR.jpg"
+        alt="Gia Bảo">
+
+      <div class="fb-info">
+        <div class="fb-name">Gia Bảo</div>
+        <div class="fb-sub">Designer Game · Public</div>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="fb-text">
       Tôi là <b>Gia Bảo</b>, designer chuyên thiết kế
       <b>thumbnail game</b>, <b>banner game</b>,
       <b>logo shop game</b> và <b>logo game kiếm hiệp</b>.
       Phong cách tập trung vào hình ảnh bắt mắt,
       đúng chất game và tối ưu hiển thị.
-    </p>
-  </div>
+    </div>
 
-  <div class="fb-image">
-    <img src="https://YOUR-POST-IMAGE.jpg" alt="Game Design Preview">
+    <!-- IMAGE -->
+    <div class="fb-media">
+      <img src="https://YOUR-POST-IMAGE.jpg" alt="Game Design">
+    </div>
+
   </div>
 </div>
 
 <style>
+/* WRAP */
+.fb-wrap{
+  display:flex;
+  justify-content:center;
+  padding:20px 0;
+  background:#0000;
+}
+
+/* POST */
 .fb-post{
-  max-width: 720px;
-  margin: 0 auto;
-  background: #18191a;
-  border-radius: 16px;
-  color: #e4e6eb;
+  width:100%;
+  max-width:680px;
+  background:#18191a;
+  border-radius:12px;
+  color:#e4e6eb;
   font-family: system-ui,-apple-system,BlinkMacSystemFont;
-  box-shadow: 0 20px 40px rgba(0,0,0,.5);
-  overflow: hidden;
+  box-shadow:0 8px 24px rgba(0,0,0,.4);
+  overflow:hidden;
 }
 
 /* HEADER */
-.fb-header{
+.fb-head{
   display:flex;
   align-items:center;
   gap:12px;
-  padding:16px;
+  padding:12px 16px;
 }
 
 .fb-avatar{
-  width:48px;
-  height:48px;
+  width:44px;
+  height:44px;
   border-radius:50%;
-  overflow:hidden;
-  flex-shrink:0;
-  background:#333;
-}
-
-.fb-avatar img{
-  width:100%;
-  height:100%;
   object-fit:cover;
+  flex-shrink:0;
 }
 
-/* USER */
-.fb-user strong{
-  display:block;
+.fb-info{
+  line-height:1.2;
+}
+
+.fb-name{
   font-size:15px;
+  font-weight:600;
 }
 
-.fb-user span{
+.fb-sub{
   font-size:13px;
-  opacity:.7;
+  color:#b0b3b8;
 }
 
-/* CONTENT */
-.fb-content{
-  padding:0 16px 12px;
+/* TEXT */
+.fb-text{
+  padding:4px 16px 12px;
   font-size:15px;
   line-height:1.6;
 }
 
-.fb-content b{
+.fb-text b{
   color:#facc15;
   font-weight:600;
 }
 
-/* POST IMAGE */
-.fb-image img{
+/* MEDIA */
+.fb-media img{
   width:100%;
   display:block;
   object-fit:cover;
