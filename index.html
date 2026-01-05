@@ -2,89 +2,159 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Liên hệ Gia Bảo | GB Design</title>
+<title>GB DESIGN — Gia Bảo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+:root{
+  --bg:#050505;
+  --card:#0f0f0f;
+  --green:#00ff88;
+  --blue:#60a5fa;
+  --yellow:#facc15;
+  --pink:#f472b6;
+  --white:#e5e7eb;
+}
+
 body{
   margin:0;
-  font-family: Arial, Helvetica, sans-serif;
-  background:#000;
-  color:#00ff66;
-  line-height:1.8;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 20% 20%, #003322, transparent 40%),
+    radial-gradient(circle at 80% 30%, #220033, transparent 45%),
+    radial-gradient(circle at 50% 80%, #001133, transparent 50%),
+    var(--bg);
+  font-family: system-ui,-apple-system,BlinkMacSystemFont;
+  color:var(--white);
+  overflow-x:hidden;
 }
 
-.section{
-  padding:50px 24px;
-  border-bottom:1px dashed #00ff66;
+/* TITLE */
+.title{
+  padding:80px 20px 40px;
+  text-align:center;
 }
 
-h1,h2{
-  margin:0 0 12px;
+.title h1{
+  font-size:48px;
+  margin:0;
+  letter-spacing:3px;
+}
+
+.title span{
+  display:block;
+  opacity:.7;
+  margin-top:10px;
+}
+
+/* CHAOS ZONE */
+.chaos{
+  position:relative;
+  min-height:120vh;
+  padding:40px 0;
+}
+
+/* CARD */
+.card{
+  position:absolute;
+  background:linear-gradient(135deg,#0a0a0a,#111);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:20px;
+  padding:22px 26px;
+  box-shadow:0 20px 50px rgba(0,0,0,.6);
+  backdrop-filter: blur(6px);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.card:hover{
+  transform:scale(1.05) rotate(0deg);
+  box-shadow:0 30px 80px rgba(0,0,0,.8);
+}
+
+/* LINK STYLE */
+.card a{
+  text-decoration:none;
+  font-size:18px;
   font-weight:700;
+  display:block;
 }
 
-.contact{
-  white-space:pre-line;
-  font-size:16px;
+/* INDIVIDUAL COLORS */
+.zalo a{ color:var(--green); }
+.mail a{ color:var(--yellow); }
+.web a{ color:var(--blue); }
+.fb a{ color:var(--pink); }
+
+/* POSITIONS (CỐ Ý KHÔNG THEO QUY TẮC) */
+.zalo{ top:80px; left:10%; transform:rotate(-6deg); }
+.mail{ top:240px; right:12%; transform:rotate(5deg); }
+.web{ top:420px; left:22%; transform:rotate(3deg); }
+.fb{ top:620px; right:18%; transform:rotate(-4deg); }
+
+/* FOOT */
+.footer{
+  padding:100px 20px 60px;
+  text-align:center;
+  opacity:.5;
+  font-size:14px;
 }
 
-.big{
-  font-size:22px;
-  font-weight:bold;
+/* MOBILE FIX */
+@media(max-width:768px){
+  .title h1{ font-size:34px; }
+  .card{
+    position:static;
+    margin:20px auto;
+    transform:none!important;
+    max-width:90%;
+  }
+  .chaos{ min-height:auto; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ====== KHỐI LIÊN HỆ CHÍNH ====== -->
-<div class="section">
-  <h1>LIÊN HỆ – GIA BẢO (GB DESIGN)</h1>
-  <div class="contact big">
-Tên: Gia Bảo  
-Nghề: Designer Game  
-
-Chuyên thiết kế:
-– Thumbnail game  
-– Banner game  
-– Logo shop game  
-– Logo game kiếm hiệp  
-
-Zalo: 0329938270  
-Email: baonguyenvip2000@gmail.com  
-Website: www.gbdesign.online  
-
-Nhận thiết kế theo yêu cầu.
-Liên hệ trực tiếp – không trung gian.
-  </div>
+<div class="title">
+  <h1>GIA BẢO</h1>
+  <span>GB DESIGN · Game Designer</span>
 </div>
 
-<!-- ====== LẶP NỘI DUNG TẠO TRANG SIÊU DÀI ====== -->
-<script>
-const contactText = `
-GIA BẢO – GB DESIGN
+<div class="chaos">
 
-Designer chuyên game:
-Thumbnail game – Banner game
-Logo shop game – Logo game kiếm hiệp
+  <div class="card zalo">
+    <a href="https://zalo.me/0329938270" target="_blank">
+      📞 Zalo<br>
+      0329 938 270
+    </a>
+  </div>
 
-Zalo: 0329938270
-Email: baonguyenvip2000@gmail.com
-Website: www.gbdesign.online
+  <div class="card mail">
+    <a href="mailto:baonguyenvip2000@gmail.com">
+      📧 Email<br>
+      baonguyenvip2000@gmail.com
+    </a>
+  </div>
 
-Liên hệ để làm việc trực tiếp.
-`;
+  <div class="card web">
+    <a href="https://www.gbdesign.online" target="_blank">
+      🌐 Website<br>
+      gbdesign.online
+    </a>
+  </div>
 
-for(let i = 1; i <= 120; i++){
-  document.write(`
-    <div class="section">
-      <h2>LIÊN HỆ GIA BẢO – ${i}</h2>
-      <div class="contact">${contactText}</div>
-    </div>
-  `);
-}
-</script>
+  <div class="card fb">
+    <a href="https://www.facebook.com/BaoNguyenADVN" target="_blank">
+      📘 Facebook<br>
+      Bao Nguyen
+    </a>
+  </div>
+
+</div>
+
+<div class="footer">
+  © Gia Bảo · GB Design · Contact chaos page
+</div>
 
 </body>
 </html>
